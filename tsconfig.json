@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+  "typeRoots": ["./node_modules/@types", "./src/types"],
+  "types": ["node"],
+  "strict": true,
+  "esModuleInterop": true,
+  "module": "commonjs",
+  "target": "es2016",
+  "forceConsistentCasingInFileNames": true,
+  "skipLibCheck": true
+},
+  "include": ["index.ts","src/**/*.ts", "src/types/**/*.d.ts"]
+}
+
