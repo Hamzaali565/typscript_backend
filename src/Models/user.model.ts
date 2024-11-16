@@ -7,6 +7,7 @@ interface IUser extends Document {
   u_id: string;
   password: string;
   isAccessToken(): Promise<string>;
+  isPassMatch(password: String): Promise<Boolean>;
 }
 
 interface IUserModel extends Model<IUser> {
@@ -28,6 +29,12 @@ userSchema.statics.isUserCheck = async function (
   u_id: string
 ): Promise<IUser | null> {
   return await this.findOne({ u_id });
+};
+
+userSchema.methods.isPassMatch = async function (
+  password: string
+): Promise<Boolean> {
+  return await bcrypt.compare(password, this.password);
 };
 
 userSchema.methods.isAccessToken = async function (): Promise<string> {
