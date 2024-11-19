@@ -12,10 +12,12 @@ const authMiddleware = asyncHandler(
   async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
       const SECRET = "topSecret";
-      const token = req?.cookies?.token;
+      const token = req?.body?.token;
+
       if (!token)
         throw new ApiError(404, "Token not found in this request !!!");
       const decodeData = jwt.verify(token, SECRET) as JwtPayload;
+      console.log("req.cookies", decodeData);
       let userCheck = await userModel.isUserCheck(decodeData.u_id);
       if (!userCheck) throw new ApiError(400, "invalid payload");
       req.user = userCheck.u_id;
